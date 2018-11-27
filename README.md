@@ -11,4 +11,4 @@ Versions with MBots will be added later.
 - LD271 IR LED
 - TSOP31238 IR Receiver
 
-![Alt text](Capture.jpg?raw=true "Title")
+![Alt text](/Capture.jpg?raw=true "Title")
