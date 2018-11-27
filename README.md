@@ -6,8 +6,7 @@ Versions with MBots will be added later.
 
 ## Hardwares
 - 2 Arduino
-- PN2222 x2
-- Resistor (varying) x 10, 8 for the LEDs and 2 for the transistor
-- LED x 8
+- Resistor (varying) x 10, 8 for the LEDs and 2x100 Ohm for the IR LED
+- Normal LED x 8
 - LD271 IR LED
 - TSOP31238 IR Receiver
