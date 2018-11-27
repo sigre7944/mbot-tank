@@ -1,10 +1,4 @@
-/*
- * IRremote: IRrecvDemo - demonstrates receiving IR codes with IRrecv
- * An IR detector/demodulator must be connected to the input RECV_PIN.
- * Version 0.1 July, 2009
- * Copyright 2009 Ken Shirriff
- * http://arcfn.com
- */
+// This if for the first robot
 
 #include <IRremote.h>
 
@@ -15,6 +9,8 @@ int LED_3 = 6;
 int LED_4 = 7;
 int health = 4;
 
+int count =0;
+
 IRrecv irrecv(RECV_PIN);
 
 IRsend irsend;
@@ -23,6 +19,7 @@ decode_results results;
 
 void setup()
 {
+  //pinMode(3, OUTPUT);
   Serial.begin(9600);
   // In case the interrupt driver crashes on setup, give a clue
   // to the user what's going on.
@@ -36,19 +33,20 @@ void setup()
 }
 
 void loop() {
-  if (irrecv.decode(&results)) 
+
+  
+  if ((irrecv.decode(&results)) ) 
   {
     Serial.print("Protocol: ");
     Serial.println(results.decode_type, DEC);
     Serial.println(results.value, HEX);
-    irrecv.resume(); // Receive the next value
-  }
-  if (results.value == 0xff9867 || results.value == 0xFF9867) 
-  {
+    if (results.value == 0xff22dd || results.value == 0xFF22DD)
+    {
     Serial.print("I'm shot");
     Serial.print(health); 
-    results.value=0;
     health--;
+    }
+    irrecv.resume(); // Receive the next value
   }
   switch(health) {
     case 1:
@@ -83,5 +81,14 @@ void loop() {
       health = 4;
       break;
   }
-  delay(1000);
+    delay(100);
+    count++;
+    if (count == 30){
+      count =0;
+     //Shooting
+     Serial.println("Shooting");
+     irsend.sendRC5(0xffc23d, 32);
+     irrecv.enableIRIn(); // Start the receiver  
+     delay(100);
+    }
 }
