@@ -17,10 +17,8 @@ void setup()
 
 }
 
-void loop() {
-  for (int i = 0; i < 3; i++) {
+void loop()
+{
     irsend.sendRC5(0xff9867, 32);
-    delay(40);
-  }
-  delay(500); //5 second delay between each signal burst
+  delay(5000); //5 second delay between each signal burst
 }
